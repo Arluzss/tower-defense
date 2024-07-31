@@ -30,11 +30,11 @@ class Bullet implements ITeste {
         let dx = this.enemy.getX() + this.enemy.getWidth() / 2 - this.x;
         let dy = this.enemy.getY() + this.enemy.getHeight() / 2 - this.y;
         let distance = Math.sqrt(dx * dx + dy * dy);
-
+        
+        console.log('distance: ', distance);
         let collisionDistance = this.enemy.getWidth() / 4;
 
         if (distance < collisionDistance) {
-            console.log('colisão destruir bola');
             this.destroy();
             this.enemy.setLife(0);
         } else {
