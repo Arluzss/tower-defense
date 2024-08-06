@@ -9,10 +9,8 @@ class Canvas {
     private HEIGHT: number = 900;
     private isAnimating: boolean = false;
     private itestObject: (Enemy | Tower)[] = [];
-    // private tower: Tower | undefined;
 
     constructor(canvas: HTMLCanvasElement) {
-        // this.tower = new Tower(200, 100);
         this.canvas = canvas;
         this.ctx = this.canvas.getContext('2d') as CanvasRenderingContext2D;
 
@@ -49,7 +47,7 @@ class Canvas {
         for (let i = 0; i < this.itestObject.length; i++) {
             this.itestObject[i].move();
             let tower = this.itestObject[1] as Tower;
-            this.itestObject[1].checkRange(this.itestObject[0] as Enemy);
+            tower.checkRange(this.itestObject[0] as Enemy);
         }
     }
 
@@ -57,15 +55,15 @@ class Canvas {
         this.clear();
         for (let i = 0; i < this.itestObject.length; i++) {
             this.itestObject[i].drawObject(this.ctx);
-            this.itestObject[1].drawObject(this.ctx);
         }
     }
 
     private animate = (): void => {
         if (!this.isAnimating) return;
-        this.update();
-        this.draw();
-        requestAnimationFrame(this.animate);
+        
+            this.draw();
+            this.update();
+            requestAnimationFrame(this.animate);
     }
 
 }

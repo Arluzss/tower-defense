@@ -1,3 +1,4 @@
 #ignore compiled directories
 /dist/
 /node_modules/
+/atlas
