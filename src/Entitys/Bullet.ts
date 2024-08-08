@@ -1,7 +1,7 @@
-import Enemy from "./Enemy.js";
-import ITeste from "../Interfaces/teste.js";
 
-class Bullet implements ITeste {
+import Enemy from "./Enemy.js";
+
+class Bullet {
     private x: number = 0;
     private y: number = 0;
     private radius: number = 10;
@@ -13,7 +13,6 @@ class Bullet implements ITeste {
         this.enemy = enemy;
         this.x = x;
         this.y = y;
-        console.log('Bullet created');
     }
 
     public drawObject(ctx: CanvasRenderingContext2D): void {
@@ -31,7 +30,6 @@ class Bullet implements ITeste {
         let dy = this.enemy.getY() + this.enemy.getHeight() / 2 - this.y;
         let distance = Math.sqrt(dx * dx + dy * dy);
         
-        console.log('distance: ', distance);
         let collisionDistance = this.enemy.getWidth() / 4;
 
         if (distance < collisionDistance) {

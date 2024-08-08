@@ -1,8 +1,7 @@
-import ITeste from "../Interfaces/teste.js";
 import Bullet from "./Bullet.js";
 import Enemy from "./Enemy.js";
 
-class Tower implements ITeste {
+class Tower {
     private x: number = 0;
     private y: number = 0;
     private width: number = 50;
@@ -12,7 +11,6 @@ class Tower implements ITeste {
     private range: number = 1500;
 
     constructor(x: number, y: number) {
-        console.log('Tower created: ', x, y);
         this.x = x;
         this.y = y;
     }
@@ -20,7 +18,14 @@ class Tower implements ITeste {
     public checkRange(enemy: Enemy): void {
         if (this.target === null) {
             this.target = enemy;
+        }else{
+            if (this.target.isDied()) {
+                this.target = null;
+                this.bullet = null;
+                return;
+            }
         }
+
 
         let dx = this.target.getX() + this.target.getWidth() / 2 - this.x;
         let dy = this.target.getY() + this.target.getHeight() / 2 - this.y;
@@ -29,18 +34,15 @@ class Tower implements ITeste {
         if (distance < this.range) {
             if (!this.bullet) {
                 this.bullet = new Bullet(this.target, this.x, this.y);
-                console.log('criou bullet');
                 return;
             }
 
             if (this.bullet.isDestroyed()) {
                 this.bullet = null;
-                console.log('destruiu bullet');
                 return;
             }
 
             this.bullet.move();
-            console.log('move bullet');
         }
 
     }

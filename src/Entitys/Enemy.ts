@@ -1,6 +1,4 @@
-import ITeste from "../Interfaces/teste";
-
-class Enemy implements ITeste{
+class Enemy {
     private health: number = 100;
     private x: number = 0;
     private y: number = 0;
@@ -14,7 +12,6 @@ class Enemy implements ITeste{
 
     constructor(target: number[][]) {
         this.target = target;
-        console.log('Enemy created');
     }
 
     drawObject(ctx: CanvasRenderingContext2D): void {
@@ -37,7 +34,6 @@ class Enemy implements ITeste{
                 this.targetX = this.target[this.currentIndex][0];
                 this.targetY = this.target[this.currentIndex][1];
             } else {
-                console.log('acabou o caminho');
                 return;
             }
 
@@ -45,6 +41,14 @@ class Enemy implements ITeste{
             this.x += (dx / distance) * this.speed;
             this.y += (dy / distance) * this.speed;
         }
+    }
+
+    isEndPath(): boolean {
+        return this.currentIndex >= this.target.length;
+    }
+
+    isDied(): boolean {
+        return this.health <= 0;
     }
 
     public setLife(life: number): void {
